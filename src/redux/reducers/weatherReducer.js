@@ -10,6 +10,8 @@ const weatherReducer = (state = initialState, action) => {
             return { ...initialState, loading: false, weather: [...state.weather, action.payload] }
         case "GET_WEATHER_ERROR":
             return { ...initialState, loading: false, error: action.payload }
+        case "UPDATE_WEATHER":
+            return { ...initialState, loading: false, weather: action.payload }
         default:
             return { ...state }
     }

@@ -27,13 +27,6 @@ function App() {
     })
   }, [])
 
-  const removeFromList = (list, index) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(index, 1);
-    setAllWheather(result)
-    return [removed, result];
-  };
-
   return (
     <div className='appContainer'>
       <div className="app">
@@ -49,10 +42,7 @@ function App() {
         <div className="container">
           {
             allWheather && allWheather?.weather?.map((item, key) => (
-              <>
-                <Wheater weatherData={item} key={key} />
-                <button onClick={() => removeFromList(allWheather?.weather, key)}>Delete</button>
-              </>
+              <Wheater weatherData={item} key={key} />
             ))
           }
           <p className='text'>

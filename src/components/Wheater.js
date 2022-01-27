@@ -1,6 +1,10 @@
 import React from 'react';
+import { useDispatch } from 'react-redux'
+import updateWeather from '../redux/actions/updateWeather'
 
-export default function Wheater({ weatherData }) {
+export default function Wheater({ weatherData, key }) {
+    const dispatch = useDispatch()
+
     return (
         <>
             {
@@ -11,26 +15,27 @@ export default function Wheater({ weatherData }) {
                             <p>{weatherData && weatherData?.name}</p>
                         </div>
                         <div className="temp">
-                            {weatherData && weatherData?.main ? <h1>{weatherData && weatherData?.main.temp.toFixed()}°F</h1> : null}
+                            {weatherData && <h1>{weatherData && weatherData?.main.temp.toFixed()}°F</h1>}
                         </div>
                         <div className="description">
-                            {weatherData && weatherData?.weather ? <p>{weatherData && weatherData?.weather[0]?.main}</p> : null}
+                            {weatherData && <p>{weatherData && weatherData?.weather[0]?.main}</p>}
                         </div>
                     </div>
                     <div className="bottom">
                         <div className="feels">
-                            {weatherData && weatherData?.main ? <p className='bold'>{weatherData && weatherData?.main.feels_like.toFixed()}°F</p> : null}
+                            {weatherData && <p className='bold'>{weatherData && weatherData?.main.feels_like.toFixed()}°F</p>}
                             <p>Feels Like</p>
                         </div>
                         <div className="humidity">
-                            {weatherData && weatherData?.main ? <p className='bold'>{weatherData && weatherData?.main.humidity}%</p> : null}
+                            {weatherData && <p className='bold'>{weatherData && weatherData?.main.humidity}%</p>}
                             <p>Humidity</p>
                         </div>
                         <div className="wind">
-                            {weatherData && weatherData?.wind ? <p className='bold'>{weatherData && weatherData?.wind.speed.toFixed()} MPH</p> : null}
+                            {weatherData && <p className='bold'>{weatherData && weatherData?.wind.speed.toFixed()} MPH</p>}
                             <p>Wind Speed</p>
                         </div>
                     </div>
+                    <button onClick={() => dispatch(updateWeather(weatherData?.weather, key))}>Delete</button>
                 </>
             }
         </>
